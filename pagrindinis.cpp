@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 struct studentas {
 std :: string vardas;
@@ -8,6 +9,21 @@ std :: string pavarde;
 std :: vector<int> namudarbai;
 int egzaminas;
 };
+
+double Vidurkis (const std:: vector <int>& namudarbai){
+  if (namudarbai.empty()) {
+    return 0.0;
+  }
+
+  double suma = 0.0;
+
+  for (int i=0; i < namudarbai.size(); i++){
+    suma = suma + namudarbai[i];
+  }
+
+  return suma / namudarbai.size();
+  
+}
 
 int main(){
   studentas S;
@@ -46,5 +62,12 @@ int main(){
     std::cout << "Iveskite egzamino rezultata dar karta: ";
     std::cin >> S.egzaminas;
 }
+  double vidurkis = Vidurkis(S.namudarbai);
+
+  double galutinis = 0.4 * vidurkis + 0.6 * S.egzaminas;
+
+  std :: cout << "Galutinis balas: " << std :: fixed << std :: setprecision(2) << galutinis << std :: endl;
+  
+  
   return 0;
 }
