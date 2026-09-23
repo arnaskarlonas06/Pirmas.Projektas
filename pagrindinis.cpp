@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 
 struct studentas {
 std :: string vardas;
@@ -23,6 +24,22 @@ double Vidurkis (const std:: vector <int>& namudarbai){
 
   return suma / namudarbai.size();
   
+}
+
+double Mediana(std :: vector<int> namudarbai){
+  if (namudarbai.empty()){
+    return 0.0;
+  }
+  std :: sort(namudarbai.begin(), namudarbai.end());
+  
+  int dydis = namudarbai.size();
+
+  if (dydis % 2 == 0){
+    return (namudarbai[dydis / 2 - 1] + namudarbai[dydis / 2]) / 2.0;
+  }
+  else {
+    return namudarbai[dydis / 2];
+  }
 }
 
 int main(){
@@ -63,10 +80,13 @@ int main(){
     std::cin >> S.egzaminas;
 }
   double vidurkis = Vidurkis(S.namudarbai);
+  double mediana = Mediana(S.namudarbai);
 
-  double galutinis = 0.4 * vidurkis + 0.6 * S.egzaminas;
+  double galutinisVid = 0.4 * vidurkis + 0.6 * S.egzaminas;
+  double galutinisMed = 0.4 * mediana + 0.6 * S.egzaminas;
 
-  std :: cout << "Galutinis balas: " << std :: fixed << std :: setprecision(2) << galutinis << std :: endl;
+  std :: cout << "Galutinis balas (Vid.): " << std :: fixed << std :: setprecision(2) << galutinisVid << std :: endl;
+  std :: cout << "Galutinis balas (Med.): " << std :: fixed << std :: setprecision(2) << galutinisMed << std :: endl;
   
   
   return 0;
