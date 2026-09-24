@@ -74,7 +74,7 @@ int main(){
   std::cin >> budas;
     
   while (budas !=1 && budas !=2){
-    std :: cout << "Klaida, galima pasirinkti tik 1 arna 2 buda: ";
+    std :: cout << "Klaida, galima pasirinkti tik 1 arba 2 buda: ";
     std :: cin >> budas;
   }
 
@@ -149,6 +149,24 @@ int main(){
     }
   }
 
+  std::cout << std::endl;
+
+std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
+
+std::cout << "--------------------------------------------------------------------------" << std::endl;
+
+
+  for (int i=0; i < studentai.size(); i++){
+    double vidurkis = Vidurkis(studentai[i].namudarbai);
+    double mediana = Mediana(studentai[i].namudarbai);
+
+    double galutinisVid = 0.4 * vidurkis + 0.6 * studentai[i].egzaminas;
+    double galutinisMed = 0.4 * mediana + 0.6 * studentai[i].egzaminas;
+
+    std::cout << std::left << std::setw(20) << studentai[i].pavarde << std::setw(20) << studentai[i].vardas << std::setw(20) << std::fixed << std::setprecision(2) << galutinisVid << std::setw(20) << galutinisMed << std::endl;
+
+    
+  }
   
   return 0;
 }
