@@ -52,6 +52,9 @@ int generuotipazymi(){
   return intervalas(generatorius);
   
 }
+bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras){
+  return pirmas.pavarde < antras.pavarde;
+}
 
 
 int main(){
@@ -203,6 +206,8 @@ while (veiksmas != 1 && veiksmas != 2) {
       std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
   }
   }
+
+  std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
 
 std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
