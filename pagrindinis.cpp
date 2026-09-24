@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <random>
+#include <fstream>
 
 struct studentas {
 std :: string vardas;
@@ -56,6 +57,40 @@ int generuotipazymi(){
 int main(){
 
   std :: vector <studentas> studentai;
+
+  std :: ifstream failas("kursiokai.txt");
+
+  if(!failas.is_open()){
+    std :: cout << "Nepavyko atidaryti failo." << std :: endl;
+  }
+  else {
+    std :: cout << "Failas atidarytas." << std :: endl;
+    std :: string antraste;
+    std :: getline(failas, antraste);
+
+    while (true) {
+    studentas S;
+
+    int nd1, nd2, nd3, nd4, nd5;
+
+    failas >> S.pavarde >> S.vardas >> nd1 >> nd2 >> nd3 >> nd4 >> nd5 >> S.egzaminas;
+
+    if (failas.fail()) {
+        break;
+    }
+
+    S.namudarbai.push_back(nd1);
+    S.namudarbai.push_back(nd2);
+    S.namudarbai.push_back(nd3);
+    S.namudarbai.push_back(nd4);
+    S.namudarbai.push_back(nd5);
+
+    studentai.push_back(S);
+}
+   // std::cout << "Nuskaityta studentu: " << studentai.size() << std::endl;
+
+    std :: cout << "Failo antraste: " << antraste << std :: endl;
+  }
 
   while (true){
   studentas S;
