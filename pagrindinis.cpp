@@ -58,39 +58,19 @@ int main(){
 
   std :: vector <studentas> studentai;
 
-  std :: ifstream failas("kursiokai.txt");
+  int veiksmas;
+  std::cout << "Pasirinkite programos veiksma:" << std::endl;
+  std::cout << "1 - Ivesti studentu duomenis" << std::endl;
+  std::cout << "2 - Nuskaityti studentus is failo" << std::endl;
+  std::cout << "Pasirinkimas: ";
+  std::cin >> veiksmas;
 
-  if(!failas.is_open()){
-    std :: cout << "Nepavyko atidaryti failo." << std :: endl;
-  }
-  else {
-    std :: cout << "Failas atidarytas." << std :: endl;
-    std :: string antraste;
-    std :: getline(failas, antraste);
-
-    while (true) {
-    studentas S;
-
-    int nd1, nd2, nd3, nd4, nd5;
-
-    failas >> S.pavarde >> S.vardas >> nd1 >> nd2 >> nd3 >> nd4 >> nd5 >> S.egzaminas;
-
-    if (failas.fail()) {
-        break;
-    }
-
-    S.namudarbai.push_back(nd1);
-    S.namudarbai.push_back(nd2);
-    S.namudarbai.push_back(nd3);
-    S.namudarbai.push_back(nd4);
-    S.namudarbai.push_back(nd5);
-
-    studentai.push_back(S);
+while (veiksmas != 1 && veiksmas != 2) {
+    std::cout << "Klaida. Pasirinkite 1 arba 2: ";
+    std::cin >> veiksmas;
 }
-   // std::cout << "Nuskaityta studentu: " << studentai.size() << std::endl;
 
-    std :: cout << "Failo antraste: " << antraste << std :: endl;
-  }
+  if (veiksmas == 1){
 
   while (true){
   studentas S;
@@ -102,6 +82,7 @@ int main(){
   std :: cin >> S.pavarde;
 
   int budas;
+    
   std::cout << "\nPasirinkite pazymiu ivedimo buda:" << std::endl;
   std::cout << "1 - Ivesti pazymius ranka" << std::endl;
   std::cout << "2 - Generuoti pazymius atsitiktinai" << std::endl;
@@ -183,7 +164,45 @@ int main(){
       break;
     }
   }
+  }
+  else if (veiksmas == 2){
+    std :: ifstream failas("kursiokai.txt");
 
+    if(!failas.is_open()){
+    std :: cout << "Nepavyko atidaryti failo." << std :: endl;
+  }
+    else {
+    std :: cout << "Failas atidarytas." << std :: endl;
+    std :: string antraste;
+    std :: getline(failas, antraste);
+
+    while (true) {
+    studentas S;
+
+    int nd1, nd2, nd3, nd4, nd5;
+
+    failas >> S.pavarde >> S.vardas
+           >> nd1 >> nd2 >> nd3 >> nd4 >> nd5
+           >> S.egzaminas;
+
+    if (failas.fail()) {
+        break;
+    }
+
+    S.namudarbai.push_back(nd1);
+    S.namudarbai.push_back(nd2);
+    S.namudarbai.push_back(nd3);
+    S.namudarbai.push_back(nd4);
+    S.namudarbai.push_back(nd5);
+
+    studentai.push_back(S);
+}
+    // std::cout << "Nuskaityta studentu: " << studentai.size() << std::endl;
+
+    //std :: cout << "Failo antraste: " << antraste << std :: endl;
+      std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
+  }
+  }
   std::cout << std::endl;
 
 std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
