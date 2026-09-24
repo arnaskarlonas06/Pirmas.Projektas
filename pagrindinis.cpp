@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <random>
 #include <fstream>
+#include <sstream>
 
 struct studentas {
 std :: string vardas;
@@ -182,27 +183,30 @@ while (veiksmas != 1 && veiksmas != 2) {
     std :: string antraste;
     std :: getline(failas, antraste);
 
-    while (true) {
-    studentas S;
+    std :: string eil;
 
-    int nd1, nd2, nd3, nd4, nd5;
+      while (std :: getline(failas, eil)){
+        studentas S;
 
-    failas >> S.pavarde >> S.vardas
-           >> nd1 >> nd2 >> nd3 >> nd4 >> nd5
-           >> S.egzaminas;
+        std :: istringstream eilutesSrautas(eil);
 
-    if (failas.fail()) {
-        break;
-    }
+        eilutesSrautas >> S.pavarde >> S.vardas;
 
-    S.namudarbai.push_back(nd1);
-    S.namudarbai.push_back(nd2);
-    S.namudarbai.push_back(nd3);
-    S.namudarbai.push_back(nd4);
-    S.namudarbai.push_back(nd5);
+        int pazymys;
+        std :: vector<int> pazymiai;
+        while (eilutesSrautas >> pazymys){
+          pazymiai.push_back(pazymys);
+        }
+        if (!pazymiai.empty()){
+          S.egzaminas = pazymiai.back();
+          pazymiai.pop_back();
 
-    studentai.push_back(S);
-}
+          S.namudarbai = pazymiai;
+          studentai.push_back(S);
+        }
+      }
+
+      
     // std::cout << "Nuskaityta studentu: " << studentai.size() << std::endl;
 
     //std :: cout << "Failo antraste: " << antraste << std :: endl;
