@@ -169,7 +169,10 @@ while (veiksmas != 1 && veiksmas != 2) {
   }
   }
   else if (veiksmas == 2){
-    std :: ifstream failas("kursiokai.txt");
+    std :: string failoPav;
+    std :: cout << "Iveskite failo pavadinima: ";
+    std :: cin >> failoPav;
+    std :: ifstream failas(failoPav);
 
     if(!failas.is_open()){
     std :: cout << "Nepavyko atidaryti failo." << std :: endl;
