@@ -54,6 +54,10 @@ int generuotipazymi(){
 
 
 int main(){
+
+  std :: vector <studentas> studentai;
+
+  while (true){
   studentas S;
 
   std :: cout << "Iveskite studento varda: ";
@@ -68,6 +72,11 @@ int main(){
   std::cout << "2 - Generuoti pazymius atsitiktinai" << std::endl;
   std::cout << "Pasirinkimas: ";
   std::cin >> budas;
+    
+  while (budas !=1 && budas !=2){
+    std :: cout << "Klaida, galima pasirinkti tik 1 arna 2 buda: ";
+    std :: cin >> budas;
+  }
 
   if (budas == 1){
   std :: cout << "Iveskite namu darbu pazymius (desimt baleje sistemoje)." << std :: endl;
@@ -127,7 +136,19 @@ int main(){
 
   std :: cout << "Galutinis balas (Vid.): " << std :: fixed << std :: setprecision(2) << galutinisVid << std :: endl;
   std :: cout << "Galutinis balas (Med.): " << std :: fixed << std :: setprecision(2) << galutinisMed << std :: endl;
-  
+
+    studentai.push_back(S);
+
+    char testi;
+
+    std :: cout << "Ar norite ivesti dar viena studenta? (t/n): ";
+    std :: cin >> testi;
+
+    if (testi == 'n' || testi == 'N'){
+      break;
+    }
+  }
+
   
   return 0;
 }
