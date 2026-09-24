@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <random>
 
 struct studentas {
 std :: string vardas;
@@ -42,6 +43,16 @@ double Mediana(std :: vector<int> namudarbai){
   }
 }
 
+int generuotipazymi(){
+  static std :: random_device atsitiktine_prad_reiksme;
+  static std :: mt19937 generatorius(atsitiktine_prad_reiksme());
+  std :: uniform_int_distribution<int> intervalas(1,10);
+
+  return intervalas(generatorius);
+  
+}
+
+
 int main(){
   studentas S;
 
@@ -51,6 +62,14 @@ int main(){
   std :: cout << "Iveskite studento pavarde: ";
   std :: cin >> S.pavarde;
 
+  int budas;
+  std::cout << "\nPasirinkite pazymiu ivedimo buda:" << std::endl;
+  std::cout << "1 - Ivesti pazymius ranka" << std::endl;
+  std::cout << "2 - Generuoti pazymius atsitiktinai" << std::endl;
+  std::cout << "Pasirinkimas: ";
+  std::cin >> budas;
+
+  if (budas == 1){
   std :: cout << "Iveskite namu darbu pazymius (desimt baleje sistemoje)." << std :: endl;
   std :: cout << "Baige ivesti, iveskite 0." << std :: endl;
 
@@ -79,6 +98,27 @@ int main(){
     std::cout << "Iveskite egzamino rezultata dar karta: ";
     std::cin >> S.egzaminas;
 }
+  }
+  else if (budas == 2){
+    int kiek;
+
+    std :: cout << "Kiek namu darbu pazymiu sugeneruoti? ";
+    std :: cin >> kiek;
+
+    for (int i=0; i < kiek; i++) {
+      S.namudarbai.push_back(generuotipazymi());
+    }
+
+    S.egzaminas = generuotipazymi();
+
+    std :: cout << "Sugeneruoti namu darbu pazymiai: ";
+
+    for (int i = 0; i < S.namudarbai.size(); i++){
+      std :: cout << S.namudarbai[i] << " ";
+    }
+    std :: cout << std :: endl;
+    std :: cout << "Sugeneruotas egzamino rezultatas: " << S.egzaminas << std :: endl;
+  }
   double vidurkis = Vidurkis(S.namudarbai);
   double mediana = Mediana(S.namudarbai);
 
