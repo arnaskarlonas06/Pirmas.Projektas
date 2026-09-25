@@ -130,9 +130,13 @@ while (veiksmas != 1 && veiksmas != 2) {
   }
   else if (budas == 2){
     int kiek;
-
     std :: cout << "Kiek namu darbu pazymiu sugeneruoti? ";
     std :: cin >> kiek;
+
+    while(kiek < 1){
+      std :: cout << "Namu darbu kiekis turi buti bent 1: ";
+      std :: cin >> kiek;
+    }
 
     for (int i=0; i < kiek; i++) {
       S.namudarbai.push_back(generuotipazymi());
@@ -206,10 +210,6 @@ while (veiksmas != 1 && veiksmas != 2) {
         }
       }
 
-      
-    // std::cout << "Nuskaityta studentu: " << studentai.size() << std::endl;
-
-    //std :: cout << "Failo antraste: " << antraste << std :: endl;
       std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
   }
   }
@@ -217,10 +217,12 @@ while (veiksmas != 1 && veiksmas != 2) {
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
 
+  std::cout << "Studentu skaicius: " << studentai.size() << std::endl;
+  std :: cout << std :: endl;
+
 std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
 
 std::cout << "--------------------------------------------------------------------------" << std::endl;
-
 
   for (int i=0; i < studentai.size(); i++){
     double vidurkis = Vidurkis(studentai[i].namudarbai);
