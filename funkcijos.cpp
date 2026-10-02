@@ -1,6 +1,7 @@
 #include "funkcijos.h"
 #include <algorithm>
 #include <random>
+#include <fstream>
 
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
@@ -43,4 +44,18 @@ int generuotipazymi(){
 }
 bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras){
   return pirmas.pavarde < antras.pavarde;
+}
+void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
+  std :: ofstream failas(failoPavadinimas);
+
+  failas << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n";
+
+  for (int i=1; i <= studentuKiekis; i++){
+    failas << "Pavarde" << i << " " << "Vardas" << i << " ";
+    for (int j=0; j<5; j++){
+      failas << generuotipazymi() << " ";
+    }
+    failas << generuotipazymi() << "\n";
+  }
+  failas.close();
 }
