@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "studentas.h"
 #include "funkcijos.h"
 
@@ -16,11 +17,12 @@ int main(){
   std::cout << "Pasirinkite programos veiksma:" << std::endl;
   std::cout << "1 - Ivesti studentu duomenis" << std::endl;
   std::cout << "2 - Nuskaityti studentus is failo" << std::endl;
+  std::cout << "3 - Generuoti studentu faila" << std :: endl;
   std::cout << "Pasirinkimas: ";
   std::cin >> veiksmas;
 
-while (veiksmas != 1 && veiksmas != 2) {
-    std::cout << "Klaida. Pasirinkite 1 arba 2: ";
+while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
+    std::cout << "Klaida. Pasirinkite 1, 2 arba 3: ";
     std::cin >> veiksmas;
 }
 
@@ -163,6 +165,21 @@ while (veiksmas != 1 && veiksmas != 2) {
       std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
   }
   }
+      else if (veiksmas == 3){
+      std :: string failoPavadinimas;
+      int studentuKiekis;
+
+      std :: cout << "Iveskite kuriamo failo pavadinima: ";
+      std :: cin >> failoPavadinimas;
+
+      std :: cout << "Iveskite studentu skaiciu: ";
+      std :: cin >> studentuKiekis;
+
+      generuoti_faila(failoPavadinimas, studentuKiekis);
+      std :: cout << "Failas sekmingai sugeneruotas. " << std :: endl;
+
+      return 0;
+    }
 
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
