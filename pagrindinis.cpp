@@ -6,13 +6,7 @@
 #include <random>
 #include <fstream>
 #include <sstream>
-
-struct studentas {
-std :: string vardas;
-std :: string pavarde;
-std :: vector<int> namudarbai;
-int egzaminas;
-};
+#include "studentas.h"
 
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
