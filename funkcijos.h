@@ -7,6 +7,7 @@
 
 double Vidurkis (const std :: vector<int>& namudarbai);
 double GalutinisVidurkis(const studentas& S);
+void padalinti_studentus (const std :: vector<studentas>& studentai, std :: vector<studentas>& vargsiukai, std :: vector<studentas>& kietiakiai);
 double Mediana (std :: vector<int> namudarbai);
 int generuotipazymi();
 bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras);
