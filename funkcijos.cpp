@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <random>
 #include <fstream>
+#include <chrono>
+#include <iostream>
 
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
@@ -46,6 +48,8 @@ bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras){
   return pirmas.pavarde < antras.pavarde;
 }
 void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
+  auto pradzia = std :: chrono :: high_resolution_clock :: now();
+  
   std :: ofstream failas(failoPavadinimas);
 
   failas << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n";
@@ -58,4 +62,8 @@ void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
     failas << generuotipazymi() << "\n";
   }
   failas.close();
+
+  auto pabaiga = std :: chrono :: high_resolution_clock :: now();
+  std :: chrono :: duration<double> laikas = pabaiga - pradzia;
+  std :: cout << "Failo " << failoPavadinimas << " generavimas uztruko " << laikas.count() << " s." << std :: endl;
 }
