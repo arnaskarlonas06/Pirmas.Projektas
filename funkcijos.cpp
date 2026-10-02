@@ -19,6 +19,10 @@ double Vidurkis (const std:: vector <int>& namudarbai){
   return suma / namudarbai.size();
   
 }
+double GalutinisVidurkis(const studentas& S){
+  double vidurkis = Vidurkis(S.namudarbai);
+  return 0.4 * vidurkis + 0.6 * S.egzaminas;
+}
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
