@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "studentas.h"
 #include "funkcijos.h"
+#include <chrono>
 
 
 int main(){
@@ -183,7 +184,15 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
       return 0;
     }
 
+  auto skirstymoPradzia = std :: chrono :: high_resolution_clock :: now();
+
   padalinti_studentus(studentai, vargsiukai, kietiakiai);
+
+  auto skirstymoPabaiga = std :: chrono :: high_resolution_clock :: now();
+
+  std :: chrono :: duration<double> skirstymoLaikas = skirstymoPabaiga - skirstymoPradzia;
+
+  std :: cout << "Studentu skirstymas uztruko: " << skirstymoLaikas.count() << " s." << std :: endl; 
   std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
   std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
 
