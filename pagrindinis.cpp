@@ -201,6 +201,17 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
   std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
   std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
 
+  auto rasymoPradzia = std :: chrono :: high_resolution_clock :: now();
+  
+  irasyti_studentus_i_faila("vargsiukai.txt", vargsiukai);
+  irasyti_studentus_i_faila("kietiakiai.txt", kietiakiai);
+
+  auto rasymoPabaiga = std :: chrono :: high_resolution_clock :: now();
+  std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
+  std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
+
+  
+  
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
 
