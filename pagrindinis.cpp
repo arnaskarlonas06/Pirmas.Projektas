@@ -12,6 +12,8 @@
 int main(){
 
   std :: vector <studentas> studentai;
+  std :: vector<studentas> vargsiukai;
+  std :: vector<studentas> kietiakiai;
 
   int veiksmas;
   std::cout << "Pasirinkite programos veiksma:" << std::endl;
@@ -180,6 +182,10 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
       return 0;
     }
+
+  padalinti_studentus(studentai, vargsiukai, kietiakiai);
+  std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
+  std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
 
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
