@@ -132,6 +132,7 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
     std :: string failoPav;
     std :: cout << "Iveskite failo pavadinima: ";
     std :: cin >> failoPav;
+    auto skaitymoPradzia = std :: chrono :: high_resolution_clock :: now();
     std :: ifstream failas(failoPav);
 
     if(!failas.is_open()){
@@ -164,6 +165,10 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
           studentai.push_back(S);
         }
       }
+      auto skaitymoPabaiga = std::chrono::high_resolution_clock::now();
+      std::chrono::duration<double> skaitymoLaikas = skaitymoPabaiga - skaitymoPradzia;
+      std::cout << "Failo nuskaitymas uztruko: " << skaitymoLaikas.count() << " s." << std::endl;
+      
 
       std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
   }
