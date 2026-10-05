@@ -4,6 +4,7 @@
 #include <fstream>
 #include <chrono>
 #include <iostream>
+#include <iomanip>
 
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
@@ -75,9 +76,29 @@ void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
     }
     failas << generuotipazymi() << "\n";
   }
+  
   failas.close();
 
   auto pabaiga = std :: chrono :: high_resolution_clock :: now();
   std :: chrono :: duration<double> laikas = pabaiga - pradzia;
   std :: cout << "Failo " << failoPavadinimas << " generavimas uztruko " << laikas.count() << " s." << std :: endl;
 }
+void irasyti_studentus_i_faila(const std::string& failoPavadinimas,
+                               const std::vector<studentas>& studentai){
+
+    std::ofstream failas(failoPavadinimas);
+
+    if (!failas.is_open()){
+        std::cout << "Nepavyko sukurti failo " << failoPavadinimas << std::endl;
+        return;
+    }
+
+    failas << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis" << "\n";
+
+    for (int i = 0; i < studentai.size(); i++){
+        failas << std::left << std::setw(20) << studentai[i].pavarde << std::setw(20) << studentai[i].vardas << std::setw(20) << std::fixed << std::setprecision(2) << GalutinisVidurkis(studentai[i]) << "\n";
+    }
+
+    failas.close();
+}
+
