@@ -197,7 +197,45 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
   std :: chrono :: duration<double> skirstymoLaikas = skirstymoPabaiga - skirstymoPradzia;
 
-  std :: cout << "Studentu skirstymas uztruko: " << skirstymoLaikas.count() << " s." << std :: endl; 
+  std :: cout << "Studentu skirstymas uztruko: " << skirstymoLaikas.count() << " s." << std :: endl;
+
+  int rikiavimoBudas;
+
+std::cout << "Pasirinkite rikiavimo buda:" << std::endl;
+std::cout << "1 - Pagal varda" << std::endl;
+std::cout << "2 - Pagal pavarde" << std::endl;
+std::cout << "3 - Pagal galutini bala" << std::endl;
+std::cout << "Pasirinkimas: ";
+std::cin >> rikiavimoBudas;
+
+while (rikiavimoBudas < 1 || rikiavimoBudas > 3){
+    std::cout << "Klaida. Pasirinkite 1, 2 arba 3: ";
+    std::cin >> rikiavimoBudas;
+}
+
+auto rikiavimoPradzia = std::chrono::high_resolution_clock::now();
+
+if (rikiavimoBudas == 1){
+    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_varda);
+    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_varda);
+}
+else if (rikiavimoBudas == 2){
+    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_pavarde);
+    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_pavarde);
+}
+else {
+    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_galutini);
+    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_galutini);
+}
+
+auto rikiavimoPabaiga = std::chrono::high_resolution_clock::now();
+
+std::chrono::duration<double> rikiavimoLaikas =
+    rikiavimoPabaiga - rikiavimoPradzia;
+
+std::cout << "Studentu rikiavimas uztruko: "
+          << rikiavimoLaikas.count() << " s." << std::endl;
+  
   std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
   std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
 
