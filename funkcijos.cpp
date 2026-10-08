@@ -18,7 +18,7 @@ double Vidurkis (const std:: vector <int>& namudarbai){
   }
 
   return suma / namudarbai.size();
-  
+
 }
 double GalutinisVidurkis(const studentas& S){
   double vidurkis = Vidurkis(S.namudarbai);
@@ -40,7 +40,7 @@ double Mediana(std :: vector<int> namudarbai){
     return 0.0;
   }
   std :: sort(namudarbai.begin(), namudarbai.end());
-  
+
   int dydis = namudarbai.size();
 
   if (dydis % 2 == 0){
@@ -57,14 +57,21 @@ int generuotipazymi(){
   std :: uniform_int_distribution<int> intervalas(1,10);
 
   return intervalas(generatorius);
-  
+
 }
 bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras){
   return pirmas.pavarde < antras.pavarde;
 }
+bool rikiavimas_pagal_varda(const studentas& pirmas, const studentas& antras){
+    return pirmas.vardas < antras.vardas;
+}
+
+bool rikiavimas_pagal_galutini(const studentas& pirmas, const studentas& antras){
+    return GalutinisVidurkis(pirmas) < GalutinisVidurkis(antras);
+}
 void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
   auto pradzia = std :: chrono :: high_resolution_clock :: now();
-  
+
   std :: ofstream failas(failoPavadinimas);
 
   failas << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n";
@@ -76,7 +83,7 @@ void generuoti_faila(const std :: string& failoPavadinimas, int studentuKiekis){
     }
     failas << generuotipazymi() << "\n";
   }
-  
+
   failas.close();
 
   auto pabaiga = std :: chrono :: high_resolution_clock :: now();
