@@ -11,6 +11,8 @@ void padalinti_studentus (const std :: vector<studentas>& studentai, std :: vect
 double Mediana (std :: vector<int> namudarbai);
 int generuotipazymi();
 bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras);
+bool rikiavimas_pagal_varda(const studentas& pirmas, const studentas& antras);
+bool rikiavimas_pagal_galutini(const studentas& pirmas, const studentas& antras);
 void generuoti_faila (const std :: string& failoPavadinimas, int studentuKiekis);
 void irasyti_studentus_i_faila(const std :: string& failoPavadinimas, const std :: vector<studentas>& studentai);
 
