@@ -39,6 +39,7 @@ void padalinti_studentus(std::vector<studentas>& studentai,
     }
 
     studentai.clear();
+  studentai.shrink_to_fit();
 }
 
 double Mediana(std :: vector<int> namudarbai){
