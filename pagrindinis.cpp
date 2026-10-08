@@ -41,13 +41,13 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
   std :: cin >> S.pavarde;
 
   int budas;
-    
+
   std::cout << "\nPasirinkite pazymiu ivedimo buda:" << std::endl;
   std::cout << "1 - Ivesti pazymius ranka" << std::endl;
   std::cout << "2 - Generuoti pazymius atsitiktinai" << std::endl;
   std::cout << "Pasirinkimas: ";
   std::cin >> budas;
-    
+
   while (budas !=1 && budas !=2){
     std :: cout << "Klaida, galima pasirinkti tik 1 arba 2 buda: ";
     std :: cin >> budas;
@@ -137,6 +137,7 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
     if(!failas.is_open()){
     std :: cout << "Nepavyko atidaryti failo." << std :: endl;
+    return 1;
   }
     else {
     std :: cout << "Failas atidarytas." << std :: endl;
@@ -168,7 +169,7 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
       auto skaitymoPabaiga = std::chrono::high_resolution_clock::now();
       std::chrono::duration<double> skaitymoLaikas = skaitymoPabaiga - skaitymoPradzia;
       std::cout << "Failo nuskaitymas uztruko: " << skaitymoLaikas.count() << " s." << std::endl;
-      
+
 
       std :: cout << "Duomenys sekmingai nuskaityti is failo." << std :: endl;
   }
@@ -235,26 +236,26 @@ std::chrono::duration<double> rikiavimoLaikas =
 
 std::cout << "Studentu rikiavimas uztruko: "
           << rikiavimoLaikas.count() << " s." << std::endl;
-  
+
   std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
   std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
 
   auto rasymoPradzia = std :: chrono :: high_resolution_clock :: now();
-  
+
   irasyti_studentus_i_faila("vargsiukai.txt", vargsiukai);
   irasyti_studentus_i_faila("kietiakiai.txt", kietiakiai);
 
   auto rasymoPabaiga = std :: chrono :: high_resolution_clock :: now();
   std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
   std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
+  if (veiksmas == 1){
 
-  
-  
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
   std::cout << std::endl;
 
   std::cout << "Studentu skaicius: " << studentai.size() << std::endl;
   std :: cout << std :: endl;
+  
 
 std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
 
@@ -269,8 +270,8 @@ std::cout << "------------------------------------------------------------------
 
     std::cout << std::left << std::setw(20) << studentai[i].pavarde << std::setw(20) << studentai[i].vardas << std::setw(20) << std::fixed << std::setprecision(2) << galutinisVid << std::setw(20) << galutinisMed << std::endl;
 
-    
+
   }
-  
+  }
   return 0;
 }
