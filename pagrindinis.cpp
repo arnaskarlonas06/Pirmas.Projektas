@@ -190,6 +190,8 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
       return 0;
     }
 
+  if (veiksmas == 2){
+
   auto skirstymoPradzia = std :: chrono :: high_resolution_clock :: now();
 
   padalinti_studentus(studentai, vargsiukai, kietiakiai);
@@ -248,6 +250,7 @@ std::cout << "Studentu rikiavimas uztruko: "
   auto rasymoPabaiga = std :: chrono :: high_resolution_clock :: now();
   std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
   std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
+  }
   if (veiksmas == 1){
 
   std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
