@@ -5,7 +5,7 @@
 #include <chrono>
 #include <iostream>
 #include <iomanip>
-
+#include <utility>
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
     return 0.0;
@@ -24,15 +24,21 @@ double GalutinisVidurkis(const studentas& S){
   double vidurkis = Vidurkis(S.namudarbai);
   return 0.4 * vidurkis + 0.6 * S.egzaminas;
 }
-void padalinti_studentus(const std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai, std::vector<studentas>& kietiakiai){
-  for (int i=0; i<studentai.size(); i++){
-    if(GalutinisVidurkis(studentai[i])<5.0){
-      vargsiukai.push_back(studentai[i]);
+void padalinti_studentus(std::vector<studentas>& studentai,
+                        std::vector<studentas>& vargsiukai,
+                        std::vector<studentas>& kietiakiai){
+
+    for (int i = 0; i < studentai.size(); i++){
+
+        if (GalutinisVidurkis(studentai[i]) < 5.0){
+            vargsiukai.push_back(std::move(studentai[i]));
+        }
+        else {
+            kietiakiai.push_back(std::move(studentai[i]));
+        }
     }
-    else {
-      kietiakiai.push_back(studentai[i]);
-    }
-  }
+
+    studentai.clear();
 }
 
 double Mediana(std :: vector<int> namudarbai){
