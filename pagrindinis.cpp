@@ -17,7 +17,21 @@ int main(){
   std :: vector<studentas> vargsiukai;
   std :: vector<studentas> kietiakiai;
 
+  int konteineris;
+
+  std :: cout << "Pasirinkite konteinerį: " << std :: endl;
+  std :: cout << "1 - std::vector" << std :: endl;
+  std :: cout << "2 - std::list" << std :: endl;
+  std :: cout << "Pasirinkimas: ";
+  std :: cin >> konteineris;
+
+  while (konteineris != 1 && konteineris != 2){
+    std :: cout << "Klaida. Pasirinkite 1 arba 2: ";
+    std :: cin >> konteineris;
+  }
+
   int veiksmas;
+  
   std::cout << "Pasirinkite programos veiksma:" << std::endl;
   std::cout << "1 - Ivesti studentu duomenis" << std::endl;
   std::cout << "2 - Nuskaityti studentus is failo" << std::endl;
