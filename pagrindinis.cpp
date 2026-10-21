@@ -8,6 +8,7 @@
 #include "studentas.h"
 #include "funkcijos.h"
 #include <chrono>
+#include <list>
 
 
 int main(){
