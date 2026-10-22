@@ -135,9 +135,14 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
   std :: cout << "Galutinis balas (Vid.): " << std :: fixed << std :: setprecision(2) << galutinisVid << std :: endl;
   std :: cout << "Galutinis balas (Med.): " << std :: fixed << std :: setprecision(2) << galutinisMed << std :: endl;
 
-    studentai.push_back(S);
-
-    std :: cout << "Studento adresas atmintyje: " << &studentai.back() << std :: endl;
+    if(konteineris == 1){
+      studentai.push_back(S);
+      std :: cout << "Vector studento adresas atmintyje: " << &studentai.back() << std :: endl;
+    }
+    else{
+      studentaiList.push_back(S);
+      std :: cout << "List studento adresas atmintyje: " << &studentaiList.back() << std :: endl;
+    }
 
     char testi;
 
