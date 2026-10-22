@@ -131,4 +131,20 @@ void irasyti_studentus_i_faila(const std::string& failoPavadinimas,
 
     failas.close();
 }
+void irasyti_studentus_i_faila(
+    const std :: string& failoPavadinimas,
+    const std :: list<studentas>& studentai)
+{
+    std :: ofstream failas(failoPavadinimas);
+    if (!failas.is_open()){
+        std :: cout << "Nepavyko sukurti failo." << std :: endl;
+        return;
+    }
+    failas << std :: left << std :: setw(20) << "Pavarde" << std :: setw(20) << "Vardas" << std :: setw(20) << "Galutinis" << std :: endl;
+
+    for (const studentas& S : studentai){
+        failas << std :: left << std :: setw(20) << S.pavarde << std :: setw(20) << S.vardas << std :: fixed << std :: setprecision(2) << GalutinisVidurkis(S) << std :: endl;
+    }
+    failas.close();
+}
 
