@@ -189,6 +189,13 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
           pazymiai.pop_back();
 
           S.namudarbai = pazymiai;
+
+          if(konteineris == 1){
+            studentai.push_back(S);
+          }
+          else {
+            studentaiList.push_back(S);
+          }
           studentai.push_back(S);
         }
       }
