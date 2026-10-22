@@ -21,5 +21,6 @@ bool rikiavimas_pagal_varda(const studentas& pirmas, const studentas& antras);
 bool rikiavimas_pagal_galutini(const studentas& pirmas, const studentas& antras);
 void generuoti_faila (const std :: string& failoPavadinimas, int studentuKiekis);
 void irasyti_studentus_i_faila(const std :: string& failoPavadinimas, const std :: vector<studentas>& studentai);
+void irasyti_studentus_i_faila(const std :: string& failoPavadinimas, const std :: list<studentas>& studentai);
 
 #endif
