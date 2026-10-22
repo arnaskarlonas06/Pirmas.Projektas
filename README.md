@@ -127,3 +127,47 @@ Atskirai matuotos keturios operacijos:
 - Rezultatų įrašymas į failus.
 
 Lentelėse pateikiami trijų bandymų aritmetiniai vidurkiai sekundėmis. Bendra trukmė apskaičiuota sudėjus keturių matuotų operacijų laikus. Vartotojo pasirinkimų įvedimo laikas neįtrauktas.
+
+### v0.3 našumo tyrimo rezultatai
+
+Toliau pateikiami trijų bandymų aritmetiniai vidurkiai sekundėmis. Abiem konteineriams naudoti tie patys pradiniai failai, o studentai rūšiuoti pagal pavardę.
+
+#### `std::vector` rezultatai
+
+| Studentų kiekis | Nuskaitymas (s) | Skirstymas (s) | Rūšiavimas (s) | Įrašymas (s) | Iš viso (s) |
+|---|---:|---:|---:|---:|---:|
+| 1 000 | 0.013502 | 0.001334 | 0.002523 | 0.007550 | 0.024909 |
+| 10 000 | 0.032267 | 0.004813 | 0.028066 | 0.024028 | 0.089174 |
+| 100 000 | 0.241075 | 0.049694 | 0.319308 | 0.162798 | 0.772875 |
+| 1 000 000 | 2.224707 | 0.408699 | 3.233653 | 1.658493 | 7.525552 |
+| 10 000 000 | 23.797733 | 3.921900 | 33.888500 | 16.361067 | 77.969200 |
+
+#### `std::list` rezultatai
+
+| Studentų kiekis | Nuskaitymas (s) | Skirstymas (s) | Rūšiavimas (s) | Įrašymas (s) | Iš viso (s) |
+|---|---:|---:|---:|---:|---:|
+| 1 000 | 0.004267 | 0.000402 | 0.000618 | 0.016526 | 0.021813 |
+| 10 000 | 0.032968 | 0.001950 | 0.007142 | 0.057715 | 0.099775 |
+| 100 000 | 0.246004 | 0.017517 | 0.063136 | 0.395943 | 0.722600 |
+| 1 000 000 | 2.227920 | 0.157941 | 0.633990 | 3.734443 | 6.754294 |
+| 10 000 000 | 22.328300 | 1.543723 | 7.656810 | 37.861533 | 69.390366 |
+
+#### Bendros trukmės palyginimas
+
+| Studentų kiekis | `std::vector` (s) | `std::list` (s) | Greitesnis konteineris |
+|---|---:|---:|---|
+| 1 000 | 0.024909 | 0.021813 | `list` |
+| 10 000 | 0.089174 | 0.099775 | `vector` |
+| 100 000 | 0.772875 | 0.722600 | `list` |
+| 1 000 000 | 7.525552 | 6.754294 | `list` |
+| 10 000 000 | 77.969200 | 69.390366 | `list` |
+
+### v0.3 tyrimo išvados
+
+1. Didėjant studentų skaičiui, abiejų konteinerių apdorojimo trukmė ilgėjo.
+2. `std::list` skirstymo operacija visuose atliktuose bandymuose buvo greitesnė. Tam įtakos turi naudojama `splice()` funkcija, leidžianti perkelti sąrašo elementus nekopijuojant studentų objektų.
+3. `std::list` rūšiavimas pagal pavardę visuose atliktuose bandymuose buvo greitesnis nei `std::vector` rūšiavimas.
+4. `std::vector` visuose bandymuose greičiau įrašė suskirstytus studentus į tekstinius failus.
+5. Apdorojant 10 000 000 studentų, vidutinė bendra `vector` trukmė buvo apie 77,97 s, o `list` – apie 69,39 s.
+6. Tyrimas parodė, kad konteinerio našumas priklauso nuo atliekamos operacijos. Vienas konteineris nebūtinai yra greičiausias visais atvejais.
+7. Mažų failų rezultatai gali labiau svyruoti dėl sistemos apkrovos, disko talpyklos ir kitų aplinkybių.
