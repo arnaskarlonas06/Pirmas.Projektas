@@ -81,3 +81,49 @@ Pastabos:
 
 Dideli sugeneruoti duomenų failai nėra būtini programos kodui saugoti GitHub saugykloje. Juos galima sugeneruoti naudojant trečiąjį programos meniu pasirinkimą.
 Ateities versijose galima toliau optimizuoti programos atminties naudojimą ir duomenų apdorojimo spartą.
+
+## Versija 0.3
+
+Šioje versijoje atliktas `std::vector` ir `std::list` konteinerių našumo palyginimas.
+
+### Pagrindiniai pakeitimai
+
+1. Pridėta galimybė programos pradžioje pasirinkti konteinerį:
+   - `1` – `std::vector<studentas>`.
+   - `2` – `std::list<studentas>`.
+2. Abu konteineriai naudojami studentų duomenims nuskaityti, skirstyti, rūšiuoti ir rezultatams įrašyti.
+3. `std::vector` studentai į grupes perkeliami naudojant `std::move()`.
+4. `std::list` studentai į grupes perkeliami naudojant `splice()`.
+5. `std::vector` rūšiuojamas naudojant `std::sort()`, o `std::list` – `list.sort()`.
+6. Rankiniu būdu įvedant studentų duomenis, išvedamas studento objekto atminties adresas.
+7. Atliktas abiejų konteinerių našumo tyrimas su penkiais skirtingo dydžio duomenų failais.
+
+### Testavimo kompiuteris
+
+| Komponentas | Specifikacija |
+|---|---|
+| Procesorius | Snapdragon X 12-core X1E80100 |
+| Procesoriaus dažnis | 3,40 GHz |
+| Procesoriaus branduoliai | 12 |
+| Operatyvioji atmintis | 16 GB LPDDR5 |
+| RAM greitis | 8448 MT/s |
+| Diskas | NVMe SSD |
+| Operacinė sistema | Windows |
+
+### Našumo tyrimo metodika
+
+Buvo lyginami `std::vector<studentas>` ir `std::list<studentas>` konteineriai.
+
+Naudoti penki duomenų failų dydžiai: 1 000, 10 000, 100 000, 1 000 000 ir 10 000 000 studentų.
+
+Kiekvienas failas buvo apdorotas po tris kartus su kiekvienu konteineriu, naudojant tuos pačius pradinius duomenis.
+
+Visuose `v0.3` bandymuose studentai rūšiuoti pagal pavardę.
+
+Atskirai matuotos keturios operacijos:
+- Duomenų nuskaitymas iš failo.
+- Studentų skirstymas į vargšiukus ir kietiakus.
+- Abiejų grupių rūšiavimas.
+- Rezultatų įrašymas į failus.
+
+Lentelėse pateikiami trijų bandymų aritmetiniai vidurkiai sekundėmis. Bendra trukmė apskaičiuota sudėjus keturių matuotų operacijų laikus. Vartotojo pasirinkimų įvedimo laikas neįtrauktas.
