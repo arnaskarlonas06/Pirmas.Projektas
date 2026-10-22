@@ -196,7 +196,6 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
           else {
             studentaiList.push_back(S);
           }
-          studentai.push_back(S);
         }
       }
       auto skaitymoPabaiga = std::chrono::high_resolution_clock::now();
@@ -227,7 +226,12 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
   auto skirstymoPradzia = std :: chrono :: high_resolution_clock :: now();
 
-  padalinti_studentus(studentai, vargsiukai, kietiakiai);
+  if (konteineris == 1){
+    padalinti_studentus(studentai, vargsiukai, kietiakiai);
+  }
+else{
+  padalinti_studentus(studentaiList, vargsiukaiList, kietiakiaiList);
+}
 
   auto skirstymoPabaiga = std :: chrono :: high_resolution_clock :: now();
 
