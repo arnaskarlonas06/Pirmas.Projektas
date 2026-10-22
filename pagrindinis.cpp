@@ -278,11 +278,14 @@ std::cout << "Studentu rikiavimas uztruko: "
   std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
   }
   if (veiksmas == 1){
-
-  std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
-  std::cout << std::endl;
-
+    if (konteineris == 1){
+      std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
+}
+else {
+    studentaiList.sort(rikiavimas_pagal_pavarde);
+}
   std::cout << "Studentu skaicius: " << studentai.size() << std::endl;
+    
   std :: cout << std :: endl;
   
 
