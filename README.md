@@ -171,3 +171,15 @@ Toliau pateikiami trijų bandymų aritmetiniai vidurkiai sekundėmis. Abiem kont
 5. Apdorojant 10 000 000 studentų, vidutinė bendra `vector` trukmė buvo apie 77,97 s, o `list` – apie 69,39 s.
 6. Tyrimas parodė, kad konteinerio našumas priklauso nuo atliekamos operacijos. Vienas konteineris nebūtinai yra greičiausias visais atvejais.
 7. Mažų failų rezultatai gali labiau svyruoti dėl sistemos apkrovos, disko talpyklos ir kitų aplinkybių.
+
+### v0.3 našumo tyrimo ekrano nuotraukos
+
+Toliau pateikiami 10 000 000 studentų apdorojimo rezultatai naudojant abu konteinerius.
+
+**std::vector rezultatai:**
+
+![10 milijonų studentų – vector](screenshots/Vector_1_10000000.png)
+
+**std::list rezultatai:**
+
+![10 milijonų studentų – list](screenshots/List_1_10000000.png)
