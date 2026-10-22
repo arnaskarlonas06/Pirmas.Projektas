@@ -254,7 +254,8 @@ while (rikiavimoBudas < 1 || rikiavimoBudas > 3){
 }
 
 auto rikiavimoPradzia = std::chrono::high_resolution_clock::now();
-
+if(konteineris == 1){
+  
 if (rikiavimoBudas == 1){
     std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_varda);
     std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_varda);
@@ -267,6 +268,21 @@ else {
     std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_galutini);
     std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_galutini);
 }
+  }
+  else {
+    if(rikiavimoBudas == 1){
+      vargsiukaiList.sort(rikiavimas_pagal_varda);
+      kietiakiaiList.sort(rikiavimas_pagal_varda);
+    }
+    else if(rikiavimoBudas == 2){
+      vargsiukaiList.sort(rikiavimas_pagal_pavarde);
+      kietiakiaiList.sort(rikiavimas_pagal_pavarde);
+    }
+    else{
+      vargsiukaiList.sort(rikiavimas_pagal_galutini);
+      kietiakiaiList.sort(rikiavimas_pagal_galutini);
+    }
+  }
 
 auto rikiavimoPabaiga = std::chrono::high_resolution_clock::now();
 
