@@ -13,7 +13,7 @@ double Vidurkis (const std:: vector <int>& namudarbai){
 
   double suma = 0.0;
 
-  for (int i=0; i < namudarbai.size(); i++){
+  for (std :: size_t i=0; i < namudarbai.size(); i++){
     suma = suma + namudarbai[i];
   }
 
@@ -28,7 +28,7 @@ void padalinti_studentus(std::vector<studentas>& studentai,
                         std::vector<studentas>& vargsiukai,
                         std::vector<studentas>& kietiakiai){
 
-    for (int i = 0; i < studentai.size(); i++){
+    for (std ::size_t i = 0; i < studentai.size(); i++){
 
         if (GalutinisVidurkis(studentai[i]) < 5.0){
             vargsiukai.push_back(std::move(studentai[i]));
@@ -125,7 +125,7 @@ void irasyti_studentus_i_faila(const std::string& failoPavadinimas,
 
     failas << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis" << "\n";
 
-    for (int i = 0; i < studentai.size(); i++){
+    for (std ::size_t i = 0; i < studentai.size(); i++){
         failas << std::left << std::setw(20) << studentai[i].pavarde << std::setw(20) << studentai[i].vardas << std::setw(20) << std::fixed << std::setprecision(2) << GalutinisVidurkis(studentai[i]) << "\n";
     }
 
