@@ -302,9 +302,16 @@ std::cout << "Studentu rikiavimas uztruko: "
     }
 
   auto rasymoPradzia = std :: chrono :: high_resolution_clock :: now();
-
+    
+    if(konteineris == 1){
   irasyti_studentus_i_faila("vargsiukai.txt", vargsiukai);
   irasyti_studentus_i_faila("kietiakiai.txt", kietiakiai);
+    }
+    else{
+      irasyti_studentus_i_faila("vargsiukai.txt", vargsiukaiList);
+      irasyti_studentus_i_faila("kietiakiai.txt", kietiakiaiList);
+      
+    }
 
   auto rasymoPabaiga = std :: chrono :: high_resolution_clock :: now();
   std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
