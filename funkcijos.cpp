@@ -41,6 +41,22 @@ void padalinti_studentus(std::vector<studentas>& studentai,
     studentai.clear();
   studentai.shrink_to_fit();
 }
+void padalinti_studentus(
+std :: list<studentas>& studentai,
+std :: list<studentas>& vargsiukai,
+std :: list<studentas>& kietiakiai)
+{
+  for (auto iteratorius = studentai.begin(); iteratorius != studentai.end();){
+    auto dabartinis = iteratorius++;
+    if(GalutinisVidurkis(*dabartinis)< 5.0){
+      vargsiukai.splice(vargsiukai.end(), studentai, dabartinis);
+    }
+    else{
+      kietiakiai.splice(kietiakiai.end(), studentai, dabartinis);
+    }
+  }
+}
+
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
