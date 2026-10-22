@@ -17,6 +17,10 @@ int main(){
   std :: vector<studentas> vargsiukai;
   std :: vector<studentas> kietiakiai;
 
+  std :: list<studentas> studentaiList;
+  std :: list<studentas> vargsiukaiList;
+  std :: list<studentas> kietiakiaiList;
+
   int konteineris;
 
   std :: cout << "Pasirinkite konteinerį: " << std :: endl;
