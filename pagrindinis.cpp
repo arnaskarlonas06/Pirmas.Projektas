@@ -120,7 +120,7 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
     std :: cout << "Sugeneruoti namu darbu pazymiai: ";
 
-    for (int i = 0; i < S.namudarbai.size(); i++){
+    for (std ::size_t i = 0; i < S.namudarbai.size(); i++){
       std :: cout << S.namudarbai[i] << " ";
     }
     std :: cout << std :: endl;
