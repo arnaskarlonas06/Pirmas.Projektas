@@ -292,8 +292,14 @@ std::chrono::duration<double> rikiavimoLaikas =
 std::cout << "Studentu rikiavimas uztruko: "
           << rikiavimoLaikas.count() << " s." << std::endl;
 
-  std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
-  std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
+    if(konteineris == 1){
+      std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
+      std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
+    }
+    else {
+      std :: cout << "Vargsiuku skaicius: " << vargsiukaiList.size() << std :: endl;
+      std :: cout << "Kietiaku skaicius: " << kietiakiaiList.size() << std :: endl;
+    }
 
   auto rasymoPradzia = std :: chrono :: high_resolution_clock :: now();
 
