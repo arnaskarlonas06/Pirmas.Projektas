@@ -133,6 +133,8 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
     studentai.push_back(S);
 
+    std :: cout << "Studento adresas atmintyje: " << &studentai.back() << std :: endl;
+
     char testi;
 
     std :: cout << "Ar norite ivesti dar viena studenta? (t/n): ";
