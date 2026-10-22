@@ -277,33 +277,39 @@ std::cout << "Studentu rikiavimas uztruko: "
   std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
   std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
   }
-  if (veiksmas == 1){
+if (veiksmas == 1){
+
     if (konteineris == 1){
-      std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
+        std :: sort(studentai.begin(), studentai.end(), rikiavimas_pagal_pavarde);
+    }
+    else {
+        studentaiList.sort(rikiavimas_pagal_pavarde);
+    }
+    if (konteineris == 1){
+        std :: cout << "Studentu skaicius: " << studentai.size() << std :: endl;
+    }
+    else {
+        std :: cout << "Studentu skaicius: " << studentaiList.size() << std :: endl;
+    }
+
+    std :: cout << std :: endl;
+    std :: cout << std :: left << std :: setw(20) << "Pavarde" << std :: setw(20) << "Vardas" << std :: setw(20) << "Galutinis (Vid.)" << std :: setw(20) << "Galutinis (Med.)" << std :: endl;
+    std :: cout << "--------------------------------------------------------------------------" << std :: endl;
+
+    if (konteineris == 1){
+        for (const studentas& S : studentai){
+            double vidurkis = Vidurkis(S.namudarbai);
+            double mediana = Mediana(S.namudarbai);
+            std :: cout << std :: left << std :: setw(20) << S.pavarde << std :: setw(20) << S.vardas << std :: setw(20) << std :: fixed << std :: setprecision(2) << 0.4 * vidurkis + 0.6 * S.egzaminas << std :: setw(20) << 0.4 * mediana + 0.6 * S.egzaminas << std :: endl;
+        }
+    }
+    else {
+        for (const studentas& S : studentaiList){
+            double vidurkis = Vidurkis(S.namudarbai);
+            double mediana = Mediana(S.namudarbai);
+            std :: cout << std :: left << std :: setw(20) << S.pavarde << std :: setw(20) << S.vardas << std :: setw(20) << std :: fixed << std :: setprecision(2) << 0.4 * vidurkis + 0.6 * S.egzaminas << std :: setw(20) << 0.4 * mediana + 0.6 * S.egzaminas << std :: endl;
+        }
+    }
 }
-else {
-    studentaiList.sort(rikiavimas_pagal_pavarde);
-}
-  std::cout << "Studentu skaicius: " << studentai.size() << std::endl;
-    
-  std :: cout << std :: endl;
-  
-
-std::cout << std::left << std::setw(20) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
-
-std::cout << "--------------------------------------------------------------------------" << std::endl;
-
-  for (int i=0; i < studentai.size(); i++){
-    double vidurkis = Vidurkis(studentai[i].namudarbai);
-    double mediana = Mediana(studentai[i].namudarbai);
-
-    double galutinisVid = 0.4 * vidurkis + 0.6 * studentai[i].egzaminas;
-    double galutinisMed = 0.4 * mediana + 0.6 * studentai[i].egzaminas;
-
-    std::cout << std::left << std::setw(20) << studentai[i].pavarde << std::setw(20) << studentai[i].vardas << std::setw(20) << std::fixed << std::setprecision(2) << galutinisVid << std::setw(20) << galutinisMed << std::endl;
-
-
-  }
-  }
-  return 0;
+return 0;
 }
