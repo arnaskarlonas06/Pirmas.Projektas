@@ -19,7 +19,7 @@ void padalinti_studentus_1(std::list<studentas>& studentai, std::list<studentas>
 void padalinti_studentus_2(std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai);
 void padalinti_studentus_2(std::list<studentas>& studentai, std::list<studentas>& vargsiukai);
 void padalinti_studentus_3(std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai);
-void padalinti_studentus_3(std::list<studentas>& studentai,vstd::list<studentas>& vargsiukai);
+void padalinti_studentus_3(std::list<studentas>& studentai, std::list<studentas>& vargsiukai);
 double Mediana (std :: vector<int> namudarbai);
 int generuotipazymi();
 bool rikiavimas_pagal_pavarde(const studentas& pirmas, const studentas& antras);
