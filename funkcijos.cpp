@@ -68,6 +68,17 @@ void padalinti_studentus_1(std::vector<studentas>& studentai, std::vector<studen
 }
     }
 }
+void padalinti_studentus_1(std::list<studentas>& studentai, std::list<studentas>& vargsiukai, std::list<studentas>& kietiakiai){
+
+    for (const studentas& S : studentai) {
+        if (GalutinisVidurkis(S) < 5.0) {
+            vargsiukai.push_back(S);
+        }
+        else {
+            kietiakiai.push_back(S);
+}
+    }
+}
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
