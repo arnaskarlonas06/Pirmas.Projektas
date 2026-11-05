@@ -57,6 +57,17 @@ std :: list<studentas>& kietiakiai)
   }
 }
 
+void padalinti_studentus_1(std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai, std::vector<studentas>& kietiakiai){
+    for (std::size_t i = 0; i < studentai.size(); i++) {
+
+        if (GalutinisVidurkis(studentai[i]) < 5.0) {
+            vargsiukai.push_back(studentai[i]);
+        }
+        else {
+            kietiakiai.push_back(studentai[i]);
+}
+    }
+}
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
