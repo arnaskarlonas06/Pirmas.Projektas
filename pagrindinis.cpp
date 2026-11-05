@@ -10,7 +10,6 @@
 #include <chrono>
 #include <list>
 
-
 int main(){
 
   std :: vector <studentas> studentai;
@@ -33,6 +32,20 @@ int main(){
     std :: cout << "Klaida. Pasirinkite 1 arba 2: ";
     std :: cin >> konteineris;
   }
+
+int strategija;
+
+std::cout << "\nPasirinkite studentu skaidymo strategija:" << std::endl;
+std::cout << "1 - Kopijavimas i du naujus konteinerius" << std::endl;
+std::cout << "2 - Vargsiukai perkeliami, stiprus lieka pradiniame" << std::endl;
+std::cout << "3 - Optimizuotas skaidymas" << std::endl;
+std::cout << "Pasirinkimas: ";
+std::cin >> strategija;
+
+while (strategija < 1 || strategija > 3) {
+    std::cout << "Klaida. Pasirinkite 1, 2 arba 3: ";
+    std::cin >> strategija;
+}
 
   int veiksmas;
   
@@ -226,11 +239,27 @@ while (veiksmas != 1 && veiksmas != 2 && veiksmas != 3) {
 
   auto skirstymoPradzia = std :: chrono :: high_resolution_clock :: now();
 
-  if (konteineris == 1){
-    padalinti_studentus(studentai, vargsiukai, kietiakiai);
-  }
-else{
-  padalinti_studentus(studentaiList, vargsiukaiList, kietiakiaiList);
+if (konteineris == 1) {
+    if (strategija == 1) {
+        padalinti_studentus_1(studentai, vargsiukai, kietiakiai);
+    }
+    else if (strategija == 2) {
+        padalinti_studentus_2(studentai, vargsiukai);
+    }
+    else {
+        padalinti_studentus_3(studentai, vargsiukai);
+    }
+}
+else {
+    if (strategija == 1) {
+        padalinti_studentus_1(studentaiList, vargsiukaiList, kietiakiaiList);
+    }
+    else if (strategija == 2) {
+        padalinti_studentus_2(studentaiList, vargsiukaiList);
+    }
+    else {
+        padalinti_studentus_3(studentaiList, vargsiukaiList);
+    }
 }
 
   auto skirstymoPabaiga = std :: chrono :: high_resolution_clock :: now();
@@ -254,36 +283,43 @@ while (rikiavimoBudas < 1 || rikiavimoBudas > 3){
 }
 
 auto rikiavimoPradzia = std::chrono::high_resolution_clock::now();
-if(konteineris == 1){
-  
-if (rikiavimoBudas == 1){
-    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_varda);
-    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_varda);
-}
-else if (rikiavimoBudas == 2){
-    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_pavarde);
-    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_pavarde);
+
+if (konteineris == 1) {
+
+    std::vector<studentas>& stiprus =
+        (strategija == 1) ? kietiakiai : studentai;
+
+    if (rikiavimoBudas == 1) {
+        std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_varda);
+        std::sort(stiprus.begin(), stiprus.end(), rikiavimas_pagal_varda);
+    }
+    else if (rikiavimoBudas == 2) {
+        std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_pavarde);
+        std::sort(stiprus.begin(), stiprus.end(), rikiavimas_pagal_pavarde);
+    }
+    else {
+        std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_galutini);
+        std::sort(stiprus.begin(), stiprus.end(), rikiavimas_pagal_galutini);
+    }
 }
 else {
-    std::sort(vargsiukai.begin(), vargsiukai.end(), rikiavimas_pagal_galutini);
-    std::sort(kietiakiai.begin(), kietiakiai.end(), rikiavimas_pagal_galutini);
-}
-  }
-  else {
-    if(rikiavimoBudas == 1){
-      vargsiukaiList.sort(rikiavimas_pagal_varda);
-      kietiakiaiList.sort(rikiavimas_pagal_varda);
-    }
-    else if(rikiavimoBudas == 2){
-      vargsiukaiList.sort(rikiavimas_pagal_pavarde);
-      kietiakiaiList.sort(rikiavimas_pagal_pavarde);
-    }
-    else{
-      vargsiukaiList.sort(rikiavimas_pagal_galutini);
-      kietiakiaiList.sort(rikiavimas_pagal_galutini);
-    }
-  }
 
+    std::list<studentas>& stiprus =
+        (strategija == 1) ? kietiakiaiList : studentaiList;
+
+    if (rikiavimoBudas == 1) {
+        vargsiukaiList.sort(rikiavimas_pagal_varda);
+        stiprus.sort(rikiavimas_pagal_varda);
+    }
+    else if (rikiavimoBudas == 2) {
+        vargsiukaiList.sort(rikiavimas_pagal_pavarde);
+        stiprus.sort(rikiavimas_pagal_pavarde);
+    }
+    else {
+        vargsiukaiList.sort(rikiavimas_pagal_galutini);
+        stiprus.sort(rikiavimas_pagal_galutini);
+    }
+}
 auto rikiavimoPabaiga = std::chrono::high_resolution_clock::now();
 
 std::chrono::duration<double> rikiavimoLaikas =
@@ -291,28 +327,40 @@ std::chrono::duration<double> rikiavimoLaikas =
 
 std::cout << "Studentu rikiavimas uztruko: "
           << rikiavimoLaikas.count() << " s." << std::endl;
-
-    if(konteineris == 1){
-      std :: cout << "Vargsiuku skaicius: " << vargsiukai.size() << std :: endl;
-      std :: cout << "Kietiaku skaicius: " << kietiakiai.size() << std :: endl;
+if (konteineris == 1) {
+    std::cout << "Vargsiuku skaicius: " << vargsiukai.size() << std::endl;
+    if (strategija == 1) {
+        std::cout << "Kietiaku skaicius: " << kietiakiai.size() << std::endl;
     }
     else {
-      std :: cout << "Vargsiuku skaicius: " << vargsiukaiList.size() << std :: endl;
-      std :: cout << "Kietiaku skaicius: " << kietiakiaiList.size() << std :: endl;
-    }
-
+        std::cout << "Kietiaku skaicius: " << studentai.size() << std::endl;
+  }}
+else {
+    std::cout << "Vargsiuku skaicius: " << vargsiukaiList.size() << std::endl;
+    if (strategija == 1) {
+        std::cout << "Kietiaku skaicius: " << kietiakiaiList.size() << std::endl;
+  }
+    else {
+        std::cout << "Kietiaku skaicius: " << studentaiList.size() << std::endl;
+}}
   auto rasymoPradzia = std :: chrono :: high_resolution_clock :: now();
-    
-    if(konteineris == 1){
-  irasyti_studentus_i_faila("vargsiukai.txt", vargsiukai);
-  irasyti_studentus_i_faila("kietiakiai.txt", kietiakiai);
+ 
+if (konteineris == 1) {
+    irasyti_studentus_i_faila("vargsiukai.txt", vargsiukai);
+    if (strategija == 1) {
+        irasyti_studentus_i_faila("kietiakiai.txt", kietiakiai);
     }
-    else{
-      irasyti_studentus_i_faila("vargsiukai.txt", vargsiukaiList);
-      irasyti_studentus_i_faila("kietiakiai.txt", kietiakiaiList);
-      
+    else {
+        irasyti_studentus_i_faila("kietiakiai.txt", studentai);
+}}
+else {
+    irasyti_studentus_i_faila("vargsiukai.txt", vargsiukaiList);
+    if (strategija == 1) {
+        irasyti_studentus_i_faila("kietiakiai.txt", kietiakiaiList);
     }
-
+    else {
+        irasyti_studentus_i_faila("kietiakiai.txt", studentaiList);
+}}
   auto rasymoPabaiga = std :: chrono :: high_resolution_clock :: now();
   std :: chrono :: duration<double> rasymoLaikas = rasymoPabaiga - rasymoPradzia;
   std :: cout << "Studentu irasymo i failus uztruko: " << rasymoLaikas.count() << " s." << std :: endl;
