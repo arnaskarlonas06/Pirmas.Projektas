@@ -79,6 +79,29 @@ void padalinti_studentus_1(std::list<studentas>& studentai, std::list<studentas>
 }
     }
 }
+void padalinti_studentus_2(std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai){
+    for (auto iteratorius = studentai.begin(); iteratorius != studentai.end();) {
+        if (GalutinisVidurkis(*iteratorius) < 5.0) {
+            vargsiukai.push_back(std::move(*iteratorius));
+            iteratorius = studentai.erase(iteratorius);
+        }
+        else {++iteratorius;
+  }
+    }
+}
+
+void padalinti_studentus_2(std::list<studentas>& studentai, std::list<studentas>& vargsiukai){
+    for (auto iteratorius = studentai.begin(); iteratorius != studentai.end();) {
+        if (GalutinisVidurkis(*iteratorius) < 5.0) {
+            auto dabartinis = iteratorius++;
+            vargsiukai.splice(vargsiukai.end(), studentai, dabartinis);
+        }
+        else {
+            ++iteratorius;
+  }
+    }
+}
+
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
