@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <utility>
+#include <iterator>
 double Vidurkis (const std:: vector <int>& namudarbai){
   if (namudarbai.empty()) {
     return 0.0;
@@ -101,7 +102,27 @@ void padalinti_studentus_2(std::list<studentas>& studentai, std::list<studentas>
   }
     }
 }
+void padalinti_studentus_3(std::vector<studentas>& studentai, std::vector<studentas>& vargsiukai){
+    auto riba = std::stable_partition(
+        studentai.begin(),
+        studentai.end(),
+        [](const studentas& S) {
+            return GalutinisVidurkis(S) >= 5.0;
+        }
+    );
+    vargsiukai.insert(vargsiukai.end(), std::make_move_iterator(riba), std::make_move_iterator(studentai.end()));
+    studentai.erase(riba, studentai.end());
+}
 
+void padalinti_studentus_3(std::list<studentas>& studentai, std::list<studentas>& vargsiukai){
+    for (auto iteratorius = studentai.begin(); iteratorius != studentai.end();) {
+        auto dabartinis = iteratorius++;
+        if (GalutinisVidurkis(*dabartinis) < 5.0) {
+          
+            vargsiukai.splice(vargsiukai.end(), studentai, dabartinis);
+}
+    }
+}
 
 double Mediana(std :: vector<int> namudarbai){
   if (namudarbai.empty()){
