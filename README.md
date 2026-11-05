@@ -183,3 +183,144 @@ Toliau pateikiami 10 000 000 studentų apdorojimo rezultatai naudojant abu konte
 **std::list rezultatai:**
 
 ![10 milijonų studentų – list](screenshots/List_1_10000000.png)
+
+# Versija 1.0
+
+## Pagrindiniai pakeitimai
+
+Šioje versijoje įgyvendintos ir palygintos trys studentų skirstymo į vargšiukus ir kietiakus strategijos, naudojant `std::vector` ir `std::list` konteinerius.
+
+Programa leidžia pasirinkti:
+
+- Konteinerį: `std::vector` arba `std::list`.
+- Vieną iš trijų studentų skirstymo strategijų.
+- Studentų duomenų įvedimą, nuskaitymą iš failo arba failo generavimą.
+- Rikiavimą pagal vardą, pavardę arba galutinį pažymį.
+
+### 1 strategija – kopijavimas į du konteinerius
+
+Sukuriami du nauji konteineriai: `vargsiukai` ir `kietiakiai`.
+
+Studentai pagal galutinį pažymį nukopijuojami į atitinkamą konteinerį. Pradinis `studentai` konteineris lieka nepakeistas.
+
+### 2 strategija – vienas papildomas konteineris
+
+Sukuriamas tik `vargsiukai` konteineris.
+
+- `std::vector` atveju vargšiukai perkeliami į naują konteinerį, o iš pradinio šalinami naudojant `erase()`.
+- `std::list` atveju naudojamas `splice()`, leidžiantis perkelti elementus nekopijuojant studentų objektų.
+
+Pradiniame konteineryje lieka kietiakai.
+
+### 3 strategija – optimizuotas skirstymas
+
+Trečioji strategija skirta pagerinti antrosios strategijos efektyvumą.
+
+- `std::vector` naudojamas `std::stable_partition()`, `std::make_move_iterator()` ir vienkartinis elementų intervalo pašalinimas naudojant `erase()`.
+- `std::list` naudojamas `splice()`, nes ši operacija leidžia efektyviai perkelti sąrašo elementus.
+
+`std::list` antroji ir trečioji strategijos naudoja iš esmės tą patį skirstymo būdą, todėl jų vykdymo laikai yra panašūs.
+
+## Našumo tyrimo metodika
+
+Testavimas atliktas tuo pačiu kompiuteriu, kuris naudotas `v0.3` tyrime:
+
+| Komponentas | Specifikacija |
+|---|---|
+| Procesorius | Snapdragon X 12-core X1E80100 |
+| Dažnis | 3,40 GHz |
+| RAM | 16 GB LPDDR5 |
+| RAM greitis | 8448 MT/s |
+| Diskas | NVMe SSD |
+| Operacinė sistema | Windows |
+
+Naudoti keturi duomenų failų dydžiai:
+
+- 10 000 studentų.
+- 100 000 studentų.
+- 1 000 000 studentų.
+- 10 000 000 studentų.
+
+Visuose bandymuose naudoti tie patys atitinkamo dydžio pradiniai duomenų failai, o studentai rūšiuoti pagal pavardę.
+
+Buvo matuojamas studentų skirstymo į dvi grupes laikas.
+
+Mažesnių duomenų rinkinių bandymai kartoti, o 10 milijonų studentų rinkiniui atliktas vienas kiekvienos išbandytos kombinacijos matavimas.
+
+## v1.0 našumo tyrimo rezultatai
+
+Lentelėse pateikti skirstymo laikai sekundėmis. Mažesnė reikšmė reiškia greitesnį skirstymą.
+
+### 10 000 studentų
+
+| Konteineris | 1 strategija | 2 strategija | 3 strategija |
+|---|---:|---:|---:|
+| `std::vector` | 0,006548 | 2,190730 | 0,005560 |
+| `std::list` | 0,006196 | 0,001700 | 0,002143 |
+
+Pateikti dviejų naujausių bandymų vidurkiai.
+
+### 100 000 studentų
+
+| Konteineris | 1 strategija | 2 strategija | 3 strategija |
+|---|---:|---:|---:|
+| `std::vector` | 0,049056 | — | 0,053861 |
+| `std::list` | 0,056017 | 0,018547 | 0,013883 |
+
+Pateikti trijų bandymų vidurkiai.
+
+### 1 000 000 studentų
+
+| Konteineris | 1 strategija | 2 strategija | 3 strategija |
+|---|---:|---:|---:|
+| `std::vector` | 0,512343 | — | 0,500251 |
+| `std::list` | 0,451928 | 0,128858 | 0,124129 |
+
+Pateikti trijų bandymų vidurkiai.
+
+### 10 000 000 studentų
+
+| Konteineris | 1 strategija | 2 strategija | 3 strategija |
+|---|---:|---:|---:|
+| `std::vector` | 4,715320 | — | 4,410240 |
+| `std::list` | 4,407810 | 1,273200 | 1,219780 |
+
+Pateikti trijų bandymų rezultatai.
+
+`std::vector` antroji strategija su didesniais failais nebuvo testuojama dėl pakartotinio `erase()` naudojimo. Ši operacija gali reikalauti perstumti daugybę elementų, todėl bendras skirstymo laikas gali labai padidėti.
+
+## Tyrimo išvados
+
+1. Pirmoji strategija yra paprasta, tačiau reikalauja papildomos atminties, nes studentai kopijuojami į du naujus konteinerius, išsaugant pradinį.
+2. Antroji `std::vector` strategija pasirodė neefektyvi dėl kartotinio elementų šalinimo iš konteinerio vidurio.
+3. Trečioji `std::vector` strategija reikšmingai pagerino skirstymo greitį, palyginti su antrąja strategija. Naudojant `std::stable_partition()` išvengiama pakartotinio kiekvieno vargšiuko šalinimo.
+4. `std::list` antroji ir trečioji strategijos buvo greitesnės už pirmąją, nes `splice()` leidžia perkelti elementus nekopijuojant studentų objektų.
+5. Apdorojant 10 000 000 studentų, greičiausiai iš išbandytų variantų veikė trečioji `std::list` strategija – 1,219780 s.
+6. Rezultatai parodė, kad skirtingų konteinerių ir algoritmų efektyvumas priklauso nuo jų atliekamų operacijų. Mažesnių duomenų rinkinių rezultatai gali svyruoti dėl kompiuterio apkrovos ir kitų veiksnių.
+
+## Programos kompiliavimas ir paleidimas
+
+Projektui naudojamas C++17 standartas.
+
+### Kompiliavimas naudojant g++
+
+```bash
+g++ -std=c++17 pagrindinis.cpp funkcijos.cpp -o programa
+```
+
+Paleidimas:
+
+```bash
+./programa
+```
+
+### Kompiliavimas naudojant CMake
+
+Projekte yra `CMakeLists.txt` failas.
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+Sukompiliuota programa bus `build` kataloge arba kompiliavimo sistemos sukurtame konfigūracijos poaplankyje.
